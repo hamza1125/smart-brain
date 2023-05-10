@@ -107,7 +107,7 @@ class App extends Component {
     this.setState({imageUrl: this.state.input})  
     //app.models.predict('face-detection', "https://samples.clarifai.com/face-det.jpg")
     //fetch("https://api.clarifai.com/v2/models/face-detection/outputs", returnClarifaiRequestOptions(this.state.input))
-    fetch('http://localhost:3001/imageurl', {
+    fetch('https://face-recognition-api-odnq.onrender.com/imageurl', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -117,7 +117,7 @@ class App extends Component {
       .then(response => response.json())
       .then(response => {
         if(response){
-          fetch('http://localhost:3001/image', {
+          fetch('https://face-recognition-api-odnq.onrender.com/image', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -148,10 +148,11 @@ class App extends Component {
     const { isSignedIn, imageUrl, route, box } = this.state;
     return (
       <div className="App">
-        <ParticlesBg type="cobweb" num={200} color="#FFFFFF" bg={true} />
+        <ParticlesBg type="circle" num={200} bg={true} />
         <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>
         { route === 'home'
           ? <div>
+              <ParticlesBg type="cobweb" num={200} color="#FFFFFF" bg={true} />
               <Logo />
               <Rank name={this.state.user.name} entries={this.state.user.entries} />
               <ImageLinkForm 
